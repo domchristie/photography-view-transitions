@@ -1,0 +1,10 @@
+---
+import { Photos } from '../photos.js'
+const { photo, photo: { url, frontmatter: { title, date, image, alt, flickr_url, camera, film, description, tags } }, index } = Astro.props
+const style = `view-transition-name: photo-${index}`
+---
+<li>
+  <a href={url}>
+    <img src={image} alt={alt} style={style}>
+  </a>
+</li>

@@ -1,0 +1,27 @@
+---
+import '../styles/global.css'
+const { title } = Astro.props
+---
+
+<script>
+import 'https://cdn.skypack.dev/pin/@hotwired/turbo@v7.1.0-V83RMQBlYCPK9CvTqQoL/mode=imports/optimized/@hotwired/turbo.js'
+import Turn from 'https://cdn.skypack.dev/@domchristie/turn'
+
+Turn.config.experimental.viewTransitions = true
+Turn.start()
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+    <link href="https://api.fontshare.com/css?f[]=bespoke-sans@1&display=swap" rel="stylesheet">
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>

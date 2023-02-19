@@ -1,15 +1,16 @@
 ---
+import Base from '../layouts/Base.astro'
+import Footer from '../components/Footer.astro'
+import Photo from '../components/Photo.astro'
+import { Photos } from '../photos.js'
+const photos = await Photos()
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base title="Dom Christie Photography">
+	<header></header>
+	<main aria-label="Content">
+    <ol aria-label="Photographs">
+			{photos.map((photo, i) => <Photo photo={photo} index={i} />)}
+		</ol>
+  </main>
+	<Footer/>
+</Base>

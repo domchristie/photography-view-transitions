@@ -1,0 +1,207 @@
+body {
+  margin: 0;
+  -webkit-text-size-adjust: 100%;
+  font-family: 'Bespoke sans', sans-serif;
+  line-height: 1.15;
+  min-height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0));
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+}
+
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+    min-height: 100dvh;
+  }
+}
+
+header,
+footer {
+  padding: .5rem;
+}
+
+header {
+  display: flex;
+}
+
+header a {
+  text-decoration: none;
+  color: inherit;
+}
+
+header a svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+footer {
+  margin-top: auto;
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+footer a {
+  color: inherit;
+}
+
+main {
+  margin: 0 auto;
+}
+
+ol[aria-label="Photographs"] {
+  margin: .375rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: .375rem;
+}
+
+ol[aria-label="Photographs"] img {
+  display: block;
+  max-width: 100%;
+  width: 15rem;
+  height: auto;
+  contain: layout;
+}
+
+figure {
+  margin: 0;
+  padding: 0 .5rem;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+figure img {
+  display: block;
+  max-width: 100%;
+  max-height: 74vh;
+  margin-right: auto;
+  margin-left: auto;
+  contain: layout;
+}
+
+figcaption {
+  position: relative;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  text-align: left;
+  line-height: 1.375;
+}
+
+figcaption h2,
+figcaption div,
+figcaption dl {
+  contain: layout;
+}
+figcaption h2 {
+  view-transition-name: photo-heading;
+}
+figcaption div {
+  view-transition-name: photo-location-time;
+}
+figcaption dl {
+  view-transition-name: photo-meta;
+}
+
+/* Enter */
+::view-transition-new(photo-heading):only-child,
+::view-transition-new(photo-location-time):only-child,
+::view-transition-new(photo-meta):only-child {
+  animation: 300ms ease var(--animation-delay, 0s) both fade-in,
+    300ms ease var(--animation-delay, 0s) both slide-up;
+}
+::view-transition-new(photo-heading):only-child {
+  --animation-delay: 50ms;
+}
+::view-transition-new(photo-location-time):only-child {
+  --animation-delay: 100ms;
+}
+::view-transition-new(photo-meta):only-child {
+  --animation-delay: 150ms;
+}
+
+/* Exit */
+::view-transition-old(photo-heading):only-child,
+::view-transition-old(photo-location-time):only-child,
+::view-transition-old(photo-meta):only-child {
+  animation: 200ms ease var(--animation-delay, 0s) both fade-out,
+    200ms ease var(--animation-delay, 0s) both slide-down;
+}
+::view-transition-old(photo-heading):only-child {
+  --animation-delay: 150ms;
+}
+::view-transition-old(photo-location-time):only-child {
+  --animation-delay: 100ms;
+}
+::view-transition-old(photo-meta):only-child {
+  --animation-delay: 50ms;
+}
+
+@keyframes fade-in {
+  0% { opacity: 0 }
+  100% { opacity: 1 }
+}
+@keyframes fade-out {
+  0% { opacity: 1 }
+  100% { opacity: 0 }
+}
+@keyframes slide-up {
+  0% { transform: translateY(2.5rem) }
+  100% { transform: translateY(0) }
+}
+@keyframes slide-down {
+  0% { transform: translateY(0) }
+  100% { transform: translateY(2.5rem) }
+}
+
+figcaption::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 2.25rem;
+  height: 2px;
+  background-color: black;
+}
+
+figure h2 {
+  margin: 0;
+  font-size: 1em;
+}
+
+figure h2 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+figure dl {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+figure dt,
+figure dd {
+  margin: 0;
+  display: inline;
+  font-size: 1em;
+  color: #666;
+}
+
+figure dt {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+figure dd+dt+dd {
+  margin-left: .375rem;
+}
